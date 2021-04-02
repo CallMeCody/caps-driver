@@ -1,0 +1,24 @@
+{
+  "name": "caps-driver",
+  "version": "1.0.0",
+  "description": "driver app",
+  "main": "driver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CallMeCody/caps-driver.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CallMeCody/caps-driver/issues"
+  },
+  "homepage": "https://github.com/CallMeCody/caps-driver#readme",
+  "dependencies": {
+    "socket.io": "^2.4.1",
+    "socket.io-client": "^2.4.0"
+  }
+}
