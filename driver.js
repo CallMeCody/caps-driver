@@ -1,23 +1,25 @@
 'use strict';
 
 const io = require('socket.io-client')
-const host = 'http://localhost:3001'
+const host = 'http://localhost:3000'
 const socket = io.connect(host)
+const caps = io.connect(`${host}/caps`)
 
-function handlePickup(payload) {
+caps.on('pickup', pickupHandler);
+caps.on('in-transit', deliverHandler);
+
+function pickupHandler(payload) {
   setTimeout(() => {
-    console.log(`DRIVER: picked up ${payload.orderID}`);
-    socket.emit('in-transit', payload)
+    console.log(`DRIVER: picked up ${payload.orderID}`)
+    caps.emit('in-transit', payload)
   }, 1000)
-
-  setTimeout(() => {
-    console.log(`DRIVER: Delivered' ${payload.orderID}`);
-    socket.emit('delivered', payload)
-  }, 3000)
 }
 
-socket.on('pickUp', handlePickup) 
-
-module.exports = handlePickup
+function deliverHandler(payload) {
+  setTimeout( () => {
+    console.log(`DRIVER: delivered ${payload.orderID}`);
+    caps.emit('delivered', payload);
+  }, 3000)
+}
 
 console.log('DRIVER CONNECTED');
